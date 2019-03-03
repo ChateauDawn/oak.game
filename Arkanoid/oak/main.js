@@ -1,38 +1,39 @@
-var log = function() {
-    console.log.apply(console, arguments)
-}
-
-var imageFromPath = function(path) {
-    // 载入图片
-    var img = new Image()
-    img.src = path
-    return img
-}
-
-var rectIntersects = function(a, b) {
-    if (b.x < a.x + a.image.width &&
-        b.x + b.image.width > a.x &&
-        b.y + b.image.height > a.y &&
-        b.y < a.y + a.image.height) {
-        return true
+var loadLevel = function(n) {
+    n -= 1
+    var level = levels[n]
+    var blocks = []
+    for (var i = 0; i < level.length; i++) {
+        var b = Block(level[i])
+        blocks.push(b)
     }
-    return false
+    return blocks
+}
+
+var enableDebugMode = function(enable) {
+    if (!enable) {
+        return
+    }
+    window.addEventListener('keydown', function(event) {
+        var k = event.key
+        if (k == 'p') {
+            // 暂停功能
+            paused = !paused
+        } else if ('123456789'.includes(k)) {
+            blocks = loadLevel(Number(k))
+        }
+    })
 }
 
 var __main = function() {
+    enableDebugMode(true)
+    paused = false
+    blocks = loadLevel(1)
+
     var fps = 30
     var game = OakGame(fps)
-    var paused = false
 
     var paddle = Paddle()
     var ball = Ball()
-    var blocks = []
-    for (var i = 0; i < 8; i++) {
-        var b = Block()
-        b.x = i * 50
-        b.y = 50
-        blocks.push(b)
-    }
 
     game.registerAction('a', function() {
         paddle.moveLeft()
@@ -42,11 +43,6 @@ var __main = function() {
     })
     game.registerAction('f', function() {
         ball.fire()
-    })
-    window.addEventListener('keydown', function(event) {
-        if (event.key == 'p') {
-            paused = !paused
-        }
     })
 
     game.update = function() {
