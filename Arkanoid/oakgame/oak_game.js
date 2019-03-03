@@ -9,69 +9,98 @@ var imageFromPath = function(path) {
     return img
 }
 
+var OakGame = function() {
+    var g = {
+        actions: {},
+        keydowns: {},
+    }
+    var canvas = document.querySelector('#id-canvas')
+    var context = canvas.getContext('2d')
+    g.canvas = canvas
+    g.context = context
+    // draw
+    g.drawImage = function(oakImage) {
+        g.context.drawImage(oakImage.image, oakImage.x, oakImage.y)
+    }
+    // events
+    window.addEventListener('keydown', function(event) {
+        g.keydowns[event.key] = true
+    })
+    window.addEventListener('keyup', function(event) {
+        g.keydowns[event.key] = false
+    })
+    // 注册事件的 action
+    g.registerAction = function(key, callback) {
+        g.actions[key] = callback
+    }
+    // timer
+    setInterval(function() {
+        // events
+        var actions = Object.keys(g.actions)
+        for (var i = 0; i < actions.length; i++) {
+            var key = actions[i]
+            if (g.keydowns[key]) {
+                // 如果按键被按下，调用注册的 action
+                g.actions[key]()
+            }
+        }
+        // update
+        g.update()
+        // clear
+        g.context.clearRect(0, 0, canvas.width, canvas.height)
+        // draw
+        g.draw()
+    }, 1000 / 30)
+
+    return g
+}
+
 var Paddle = function() {
-    path = 'img/paddle.png'
-    image = imageFromPath(path)
+    var image = imageFromPath('img/paddle.png')
+    var canvas = document.querySelector('#id-canvas')
     p = {
         image: image,
         x: 100,
         y: 200,
         speed: 5,
     }
+    p.moveLeft = function() {
+        p.x -= p.speed
+        min = 0
+        if (p.x < min) {
+            p.x = min
+        }
+    }
+    p.moveRight = function() {
+        p.x += p.speed
+        max = canvas.width - p.image.width
+        if (p.x > max) {
+            p.x = max
+        }
+    }
     return p
 }
 
 var __main = function() {
-    var canvas = document.querySelector('#id-canvas')
-    var context = canvas.getContext('2d')
+    var game = OakGame()
 
     var paddle = Paddle()
-    paddle.image.onload = function(){
-        context.drawImage(paddle.image, paddle.x, paddle.y)
+
+    game.registerAction('a', function() {
+        paddle.moveLeft()
+    })
+    game.registerAction('d', function() {
+        paddle.moveRight()
+    })
+
+    game.update = function() {
+        // update
     }
 
-    var leftDown = false
-    var rightDown = false
-    // events
-    window.addEventListener('keydown', function(event){
-        // log(event)
-        var k = event.key
-        if (k == 'a') {
-            leftDown = true
-        } else if (k == 'd') {
-            rightDown = true
-        }
-    })
-
-    window.addEventListener('keyup', function(event){
-        // log(event)
-        var k = event.key
-        if (k == 'a') {
-            leftDown = false
-        } else if (k == 'd') {
-            rightDown = false
-        }
-    })
-
-
-    // 按帧率刷新
-    setInterval(function(){
-        // update x
-        if (leftDown) {
-            paddle.x -= paddle.speed
-        } else if (rightDown) {
-            paddle.x += paddle.speed
-        }
-        // clamp x
-        if (paddle.x < 0) {
-            paddle.x = 0
-        } else if (paddle.x > canvas.width - paddle.image.width) {
-            paddle.x = canvas.width - paddle.image.width
-        }
-        // draw 先清空画布，再重画
-        context.clearRect(0, 0, canvas.width, canvas.height)
-        context.drawImage(paddle.image, paddle.x, paddle.y)
-    }, 1000/30)
+    game.draw = function() {
+        // draw
+        game.drawImage(paddle)
+    }
 }
 
 __main()
