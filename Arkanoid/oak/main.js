@@ -9,31 +9,40 @@ var loadLevel = function(n) {
     return blocks
 }
 
+var blocks = []
 var enableDebugMode = function(enable) {
     if (!enable) {
         return
     }
+    window.paused = false
     window.addEventListener('keydown', function(event) {
         var k = event.key
         if (k == 'p') {
             // 暂停功能
-            paused = !paused
+            window.paused = !window.paused
         } else if ('123456789'.includes(k)) {
+            // 关卡选择功能
             blocks = loadLevel(Number(k))
         }
+    })
+    // 控制速度
+    document.querySelector('#id-input-speed').addEventListener('input', function(event) {
+        var input = event.target
+        window.fps = Number(input.value)
     })
 }
 
 var __main = function() {
     enableDebugMode(true)
-    paused = false
-    blocks = loadLevel(1)
 
     var fps = 30
     var game = OakGame(fps)
 
     var paddle = Paddle()
     var ball = Ball()
+
+    // 初始关卡
+    blocks = loadLevel(1)
 
     game.registerAction('a', function() {
         paddle.moveLeft()
@@ -46,7 +55,7 @@ var __main = function() {
     })
 
     game.update = function() {
-        if (paused) {
+        if (window.paused) {
             return
         }
         ball.move()
