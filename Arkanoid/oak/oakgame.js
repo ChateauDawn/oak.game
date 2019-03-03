@@ -57,34 +57,77 @@ var OakGame = function() {
 
 var Paddle = function() {
     var image = imageFromPath('img/paddle.png')
-    var canvas = document.querySelector('#id-canvas')
-    p = {
+    var o = {
+        image: image,
+        x: 100,
+        y: 280,
+        speed: 20,
+    }
+    o.moveLeft = function() {
+        o.x -= o.speed
+        min = 0
+        if (o.x < min) {
+            o.x = min
+        }
+    }
+    o.moveRight = function() {
+        o.x += o.speed
+        // max = canvas.width - o.image.width
+        max = 400 - o.image.width
+        if (o.x > max) {
+            o.x = max
+        }
+    }
+    o.collide = function(ball) {
+        if (ball.x < o.x + o.image.width &&
+            ball.x + ball.image.width > o.x &&
+            ball.y + ball.image.height > o.y &&
+            ball.y < o.y + o.image.height) {
+            return true
+        }
+        return false
+    }
+    return o
+}
+
+var Ball = function() {
+    var image = imageFromPath('img/ball.png')
+    var o = {
         image: image,
         x: 100,
         y: 200,
-        speed: 5,
+        speedX: 10,
+        speedY: 10,
+        fired: false,
     }
-    p.moveLeft = function() {
-        p.x -= p.speed
-        min = 0
-        if (p.x < min) {
-            p.x = min
+    o.fire = function() {
+        o.fired = true
+    }
+    o.move = function() {
+        if (o.fired) {
+            // log('move')
+            if (o.x < 0 || o.x + o.image.width > 400) {
+                o.speedX *= -1
+            }
+            if (o.y < 0 || o.y + o.image.height > 300) {
+                o.speedY *= -1
+            }
+            // move
+            o.x += o.speedX
+            o.y += o.speedY
         }
     }
-    p.moveRight = function() {
-        p.x += p.speed
-        max = canvas.width - p.image.width
-        if (p.x > max) {
-            p.x = max
-        }
+    o.rebound = function() {
+        o.speedY *= -1
     }
-    return p
+    return o
 }
 
 var __main = function() {
     var game = OakGame()
 
     var paddle = Paddle()
+    var ball = Ball()
 
     game.registerAction('a', function() {
         paddle.moveLeft()
@@ -92,14 +135,22 @@ var __main = function() {
     game.registerAction('d', function() {
         paddle.moveRight()
     })
+    game.registerAction('f', function() {
+        ball.fire()
+    })
 
     game.update = function() {
-        // update
+        ball.move()
+        if (paddle.collide(ball)) {
+            ball.rebound()
+
+        }
     }
 
     game.draw = function() {
         // draw
         game.drawImage(paddle)
+        game.drawImage(ball)
     }
 }
 
