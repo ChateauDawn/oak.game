@@ -1,7 +1,8 @@
-var OakGame = function(fps, images, runCallback) {
+var OakGame = function(fps, images, sceneCallback) {
     // images 是一个对象, 里面是图片的引用名字和图片路径
     // 程序会在所有图片载入成功后才运行
     var g = {
+        scene: null,
         actions: {},
         keydowns: {},
         images: {},
@@ -21,6 +22,14 @@ var OakGame = function(fps, images, runCallback) {
     window.addEventListener('keyup', function(event) {
         g.keydowns[event.key] = false
     })
+    // update
+    g.update = function() {
+        g.scene.upadte()
+    }
+    // draw
+    g.draw = function() {
+        g.scene.draw()
+    }
     // 注册事件的 action(callback)
     g.registerAction = function(key, callback) {
         g.actions[key] = callback
@@ -65,7 +74,7 @@ var OakGame = function(fps, images, runCallback) {
             // 所有图片都载入完成后，调用 g.run
             loads.push(1)
             if (loads.length == names.length) {
-                g.run()
+                g.__start()
             }
         }
     }
@@ -78,9 +87,10 @@ var OakGame = function(fps, images, runCallback) {
     //     }
     //     return o
     // }
-    g.run = function(){
+    g.__start = function(scene){
         //
-        runCallback(g)
+        scene = sceneCallback(g)
+        g.scene = scene
         // 开始运行程序
         setTimeout(function(){
             runloop()
