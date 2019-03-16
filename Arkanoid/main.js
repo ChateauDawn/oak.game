@@ -4,7 +4,7 @@ var loadLevel = function(game, n) {
     var blocks = []
     for (var i = 0; i < level.length; i++) {
         var p = level[i]
-        var b = Block(game, p)
+        var b = Block.instance(game, p)
         blocks.push(b)
     }
     return blocks

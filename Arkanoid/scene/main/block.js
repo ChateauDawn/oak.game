@@ -1,25 +1,20 @@
-var Block = function(game, position) {
-    // position 是 [0, 0] 格式
-    var p = position
-    var image = game.images['block']
-    var o = {
-        image: image,
-        x: p[0],
-        y: p[1],
-        w: image.width,
-        h: image.height,
-        alive: true,
-        lifes: p[2] || 1,
+class Block extends OakImage {
+    constructor(game, position) {
+        // position 是 [0, 0] 格式
+        super(game, 'block')
+        var p = position
+        this.x = p[0]
+        this.y = p[1]
+        this.lifes = p[2] || 1
+        this.alive = true
     }
-
-    o.kill = function() {
-        o.lifes--
-        if (o.lifes < 1) {
-            o.alive = false
+    kill(x) {
+        this.lifes--
+        if (this.lifes < 1) {
+            this.alive = false
         }
     }
-    o.collide = function(ball) {
-        return o.alive && rectIntersects(o, ball)
+    collide(ball) {
+        return this.alive && this.rectIntersects(this, ball)
     }
-    return o
 }

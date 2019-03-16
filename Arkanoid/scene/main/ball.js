@@ -1,18 +1,11 @@
-class Ball {
+class Ball extends OakImage {
     constructor(game) {
-        var image = game.images['ball']
-        this.image = image
-        this.w = image.width
-        this.h = image.height
+        super(game, 'ball')
         this.x = 100
         this.y = 200
         this.speedX = 12
         this.speedY = 12
         this.fired = false
-    }
-    static instance(...args) {
-        this.i = this.i || new this(...args)
-        return this.i
     }
     fire() {
         this.fired = true
