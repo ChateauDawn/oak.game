@@ -19,32 +19,6 @@ var Scene = function(game) {
     game.registerAction('f', function() {
         ball.fire()
     })
-    s.upadte = function() {
-        if (window.paused) {
-            return
-        }
-        ball.move()
-        // 判断游戏结束
-        if (ball.y > paddle.y + paddle.h) {
-            var end = SceneEnd(game)
-            game.replaceScene(end)
-        }
-        // 判断相撞
-        if (paddle.collide(ball)) {
-            ball.rebound()
-
-        }
-        // 判断 ball 和 blocks 相撞
-        for (var i = 0; i < blocks.length; i++) {
-            var block = blocks[i]
-            if (block.collide(ball)) {
-                block.kill()
-                ball.rebound()
-                // 更新分数
-                score += 100
-            }
-        }
-    }
     s.draw = function() {
         // draw 背景
         // game.context.fillStyle = "#554"
@@ -63,6 +37,32 @@ var Scene = function(game) {
         // draw labels
         game.context.fillText('分数： ' + score, 10, 290)
 
+    }
+    s.update = function() {
+        if (window.paused) {
+            return
+        }
+        ball.move()
+        // 判断游戏结束
+        if (ball.y > paddle.y + paddle.h) {
+            var end = SceneEnd.new(game)
+            game.replaceScene(end)
+        }
+        // 判断相撞
+        if (paddle.collide(ball)) {
+            ball.rebound()
+
+        }
+        // 判断 ball 和 blocks 相撞
+        for (var i = 0; i < blocks.length; i++) {
+            var block = blocks[i]
+            if (block.collide(ball)) {
+                block.kill()
+                ball.rebound()
+                // 更新分数
+                score += 100
+            }
+        }
     }
     // mouse event
     var enableDrag = false

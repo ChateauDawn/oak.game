@@ -1,3 +1,8 @@
+class OakGame {
+    constructor(fps, images, sceneCallback) {
+
+    }
+}
 var OakGame = function(fps, images, sceneCallback) {
     // images 是一个对象, 里面是图片的引用名字和图片路径
     // 程序会在所有图片载入成功后才运行
@@ -24,7 +29,7 @@ var OakGame = function(fps, images, sceneCallback) {
     })
     // update
     g.update = function() {
-        g.scene.upadte()
+        g.scene.update()
     }
     // draw
     g.draw = function() {

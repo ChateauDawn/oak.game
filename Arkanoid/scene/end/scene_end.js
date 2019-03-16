@@ -1,20 +1,12 @@
-var SceneEnd = function(game) {
-    var s = {
-        game: game,
+class SceneEnd extends OakScene {
+    constructor(game) {
+        super(game)
+        game.registerAction('r', function() {
+            var s = SceneTitle.new(game)
+            game.replaceScene(s)
+        })
     }
-    game.registerAction('r', function() {
-        var s = SceneTitle(game)
-        game.replaceScene(s)
-    })
-    // 初始化
-    s.upadte = function() {
-
+    draw() {
+        this.game.context.fillText('游戏结束, 按 R 重玩', 150, 150)
     }
-    s.draw = function() {
-        // draw labels
-        game.context.fillText('按 R 重玩', 170, 150)
-
-    }
-
-    return s
 }

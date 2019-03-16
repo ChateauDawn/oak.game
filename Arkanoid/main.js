@@ -40,7 +40,7 @@ var __main = function() {
         block: 'img/block.png',
     }
     var game = OakGame(fps, images, function(g) {
-        var s = SceneTitle(g)
+        var s = SceneTitle.new(g)
         return s
     })
 
