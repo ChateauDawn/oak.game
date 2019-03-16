@@ -1,13 +1,13 @@
-var Block = function(position) {
+var Block = function(game, position) {
     // position 是 [0, 0] 格式
     var p = position
-    var image = imageFromPath('img/block.png')
+    var image = game.images['block']
     var o = {
         image: image,
         x: p[0],
         y: p[1],
-        w: 40,
-        h: 19,
+        w: image.width,
+        h: image.height,
         alive: true,
         lifes: p[2] || 1,
     }
