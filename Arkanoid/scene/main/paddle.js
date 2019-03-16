@@ -1,32 +1,43 @@
-var Paddle = function(game) {
-    var image = game.images['paddle']
-    var o = {
-        image: image,
-        w: image.width,
-        h: image.height,
-        x: 130,
-        y: 260,
-        speed: 20,
+class Paddle {
+    constructor(game) {
+        var image = game.images['paddle']
+        this.image = image
+        this.w = image.width
+        this.h = image.height
+        this.x = 130
+        this.y = 260
+        this.speed = 20
     }
-    o.move = function(x) {
+    static instance(...args) {
+        this.i = this.i || new this(...args)
+        return this.i
+    }
+    move(x) {
         if (x < 0) {
             x = 0
         }
-        if (x > 400 - o.w) {
-            x = 400 - o.w
+        if (x > 400 - this.w) {
+            x = 400 - this.w
         }
-        o.x = x
+        this.x = x
+    }
+    moveLeft() {
+        this.move(this.x - this.speed)
 
     }
-    o.moveLeft = function() {
-        o.move(o.x - o.speed)
-
+    moveRight() {
+        this.move(this.x + this.speed)
     }
-    o.moveRight = function() {
-        o.move(o.x + o.speed)
+    rectIntersects(a, b) {
+        if (b.x < a.x + a.w &&
+            b.x + b.w > a.x &&
+            b.y + b.h > a.y &&
+            b.y < a.y + a.h) {
+            return true
+        }
+        return false
     }
-    o.collide = function(ball) {
-        return rectIntersects(o, ball)
+    collide(ball) {
+        return this.rectIntersects(this, ball)
     }
-    return o
 }

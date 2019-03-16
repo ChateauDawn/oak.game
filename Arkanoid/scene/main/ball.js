@@ -1,40 +1,43 @@
-var Ball = function(game) {
-    var image = game.images['ball']
-    var o = {
-        image: image,
-        w: image.width,
-        h: image.height,
-        x: 100,
-        y: 200,
-        speedX: 12,
-        speedY: 12,
-        fired: false,
+class Ball {
+    constructor(game) {
+        var image = game.images['ball']
+        this.image = image
+        this.w = image.width
+        this.h = image.height
+        this.x = 100
+        this.y = 200
+        this.speedX = 12
+        this.speedY = 12
+        this.fired = false
     }
-    o.fire = function() {
-        o.fired = true
+    static instance(...args) {
+        this.i = this.i || new this(...args)
+        return this.i
     }
-    o.move = function() {
-        if (o.fired) {
+    fire() {
+        this.fired = true
+    }
+    move() {
+        if (this.fired) {
             // log('move')
-            if (o.x < 0 || o.x + o.w > 400) {
-                o.speedX *= -1
+            if (this.x < 0 || this.x + this.w > 400) {
+                this.speedX *= -1
             }
-            if (o.y < 0 || o.y + o.h > 300) {
-                o.speedY *= -1
+            if (this.y < 0 || this.y + this.h > 300) {
+                this.speedY *= -1
             }
             // move
-            o.x += o.speedX
-            o.y += o.speedY
+            this.x += this.speedX
+            this.y += this.speedY
         }
     }
     // TODO，检测，左右碰撞，反弹 X
-    o.rebound = function() {
-        o.speedY *= -1
+    rebound() {
+        this.speedY *= -1
     }
-    o.hasPoint = function(x, y) {
-        var xIn = x >= o.x && x<= o.x + o.w
-        var yIn = y >= o.y && y<= o.y + o.h
+    hasPoint(x, y) {
+        var xIn = x >= this.x && x<= this.x + this.w
+        var yIn = y >= this.y && y<= this.y + this.h
         return xIn && yIn
     }
-    return o
 }
