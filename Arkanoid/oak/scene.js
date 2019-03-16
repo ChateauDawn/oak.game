@@ -24,6 +24,11 @@ var Scene = function(game) {
             return
         }
         ball.move()
+        // 判断游戏结束
+        if (ball.y > paddle.y) {
+            var end = SceneEnd(game)
+            game.replaceScene(end)
+        }
         // 判断相撞
         if (paddle.collide(ball)) {
             ball.rebound()

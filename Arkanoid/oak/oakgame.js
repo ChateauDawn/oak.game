@@ -87,10 +87,13 @@ var OakGame = function(fps, images, sceneCallback) {
     //     }
     //     return o
     // }
+    g.replaceScene = function(scene) {
+        g.scene = scene
+    }
     g.__start = function(scene){
         //
         scene = sceneCallback(g)
-        g.scene = scene
+        g.replaceScene(scene)
         // 开始运行程序
         setTimeout(function(){
             runloop()
