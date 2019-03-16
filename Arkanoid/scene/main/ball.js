@@ -6,8 +6,8 @@ var Ball = function(game) {
         h: image.height,
         x: 100,
         y: 200,
-        speedX: 15,
-        speedY: 15,
+        speedX: 12,
+        speedY: 12,
         fired: false,
     }
     o.fire = function() {

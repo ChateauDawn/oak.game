@@ -25,7 +25,7 @@ var Scene = function(game) {
         }
         ball.move()
         // 判断游戏结束
-        if (ball.y > paddle.y) {
+        if (ball.y > paddle.y + paddle.h) {
             var end = SceneEnd(game)
             game.replaceScene(end)
         }

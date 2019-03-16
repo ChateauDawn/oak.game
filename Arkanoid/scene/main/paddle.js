@@ -4,8 +4,8 @@ var Paddle = function(game) {
         image: image,
         w: image.width,
         h: image.height,
-        x: 100,
-        y: 280,
+        x: 130,
+        y: 260,
         speed: 20,
     }
     o.move = function(x) {

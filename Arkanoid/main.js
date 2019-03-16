@@ -33,14 +33,14 @@ var enableDebugMode = function(game, enable) {
 }
 
 var __main = function() {
-    var fps = 30
+    var fps = 20
     var images = {
         paddle: 'img/paddle.png',
         ball: 'img/ball.png',
         block: 'img/block.png',
     }
     var game = OakGame(fps, images, function(g) {
-        var s = Scene(g)
+        var s = SceneTitle(g)
         return s
     })
 
