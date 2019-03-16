@@ -39,7 +39,7 @@ var __main = function() {
         ball: 'img/ball.png',
         block: 'img/block.png',
     }
-    var game = new OakGame(fps, images, function(g) {
+    var game = OakGame.instance(fps, images, function(g) {
         var s = SceneTitle.new(g)
         return s
     })
