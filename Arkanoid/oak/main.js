@@ -33,14 +33,13 @@ var enableDebugMode = function(enable) {
 }
 
 var __main = function() {
-    enableDebugMode(true)
-
     var fps = 30
     var game = OakGame(fps)
 
     var paddle = Paddle()
     var ball = Ball()
 
+    var score = 0
     // 初始关卡
     blocks = loadLevel(1)
 
@@ -70,9 +69,34 @@ var __main = function() {
             if (block.collide(ball)) {
                 block.kill()
                 ball.rebound()
+                // 更新分数
+                score += 100
             }
         }
     }
+    // mouse event
+    var enableDrag = false
+    game.canvas.addEventListener('mousedown', function(event) {
+        var x = event.offsetX
+        var y = event.offsetY
+        // 检查是否点中了 ball
+        if (ball.hasPoint(x, y)) {
+            // 设置拖拽状态
+            enableDrag = true
+        }
+    })
+    game.canvas.addEventListener('mousemove', function(event) {
+        var x = event.offsetX
+        var y = event.offsetY
+        // 检查是否点中了 ball
+        if (enableDrag) {
+            ball.x = x
+            ball.y = y
+        }
+    })
+    game.canvas.addEventListener('mouseup', function(event) {
+        enableDrag = false
+    })
 
     game.draw = function() {
         // draw
@@ -85,7 +109,11 @@ var __main = function() {
                 game.drawImage(block)
             }
         }
+        // draw labels
+        game.context.fillText('分数： ' + score, 10, 290)
     }
+
+    enableDebugMode(true)
 }
 
 __main()

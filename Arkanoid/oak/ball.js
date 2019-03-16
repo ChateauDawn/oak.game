@@ -25,8 +25,14 @@ var Ball = function() {
             o.y += o.speedY
         }
     }
+    // TODO，检测，左右碰撞，反弹 X
     o.rebound = function() {
         o.speedY *= -1
+    }
+    o.hasPoint = function(x, y) {
+        var xIn = x >= o.x && x<= o.x + o.image.width
+        var yIn = y >= o.y && y<= o.y + o.image.height
+        return xIn && yIn
     }
     return o
 }
