@@ -3,8 +3,8 @@ var Scene = function(game) {
         game: game,
     }
     // 初始化
-    var paddle = Paddle.instance(game)
-    var ball = Ball.instance(game)
+    var paddle = Paddle.new(game)
+    var ball = Ball.new(game)
 
     var score = 0
     // 初始关卡

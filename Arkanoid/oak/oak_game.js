@@ -26,6 +26,9 @@ class OakGame {
         this.i = this.i || new this(...args)
         return this.i
     }
+    static new(...args) {
+        return new this(...args)
+    }
     drawImage(img) {
         this.context.drawImage(img.image, img.x, img.y)
     }
