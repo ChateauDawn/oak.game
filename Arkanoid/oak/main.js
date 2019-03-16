@@ -40,6 +40,7 @@ var __main = function() {
         block: 'img/block.png',
     }
     var game = OakGame(fps, images, function(g) {
+        var game = g
         var paddle = Paddle(game)
         var ball = Ball(game)
 
