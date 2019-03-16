@@ -9,6 +9,9 @@ class OakImage {
         this.i = this.i || new this(...args)
         return this.i
     }
+    static new(...args) {
+        return new this(...args)
+    }
     rectIntersects(a, b) {
         if (b.x < a.x + a.w &&
             b.x + b.w > a.x &&
@@ -17,8 +20,5 @@ class OakImage {
             return true
         }
         return false
-    }
-    collide(ball) {
-        return this.rectIntersects(this, ball)
     }
 }

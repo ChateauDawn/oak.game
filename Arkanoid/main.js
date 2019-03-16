@@ -4,7 +4,7 @@ var loadLevel = function(game, n) {
     var blocks = []
     for (var i = 0; i < level.length; i++) {
         var p = level[i]
-        var b = Block.instance(game, p)
+        var b = Block.new(game, p)
         blocks.push(b)
     }
     return blocks
@@ -22,7 +22,7 @@ var enableDebugMode = function(game, enable) {
             window.paused = !window.paused
         } else if ('123456789'.includes(k)) {
             // 关卡选择功能
-            blocks = loadLevel(game, Number(k))
+            window.blocks = loadLevel(game, Number(k))
         }
     })
     // 控制速度
