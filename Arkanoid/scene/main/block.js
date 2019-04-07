@@ -15,6 +15,6 @@ class Block extends GuaImage {
         }
     }
     collide(ball) {
-        return this.alive && this.rectIntersects(this, ball)
+        return this.alive && this.rectIntersects(ball)
     }
 }

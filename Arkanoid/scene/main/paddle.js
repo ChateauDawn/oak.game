@@ -22,6 +22,6 @@ class Paddle extends GuaImage {
         this.move(this.x + this.speed)
     }
     collide(ball) {
-        return this.rectIntersects(this, ball)
+        return this.rectIntersects(ball)
     }
 }
