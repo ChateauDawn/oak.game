@@ -1,4 +1,4 @@
-class OakImage {
+class GuaImage {
     constructor(game, name) {
         var image = game.images[name]
         this.image = image

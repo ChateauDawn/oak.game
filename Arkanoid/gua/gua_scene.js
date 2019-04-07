@@ -1,4 +1,4 @@
-class OakScene {
+class GuaScene {
     constructor(game) {
         this.game = game
     }

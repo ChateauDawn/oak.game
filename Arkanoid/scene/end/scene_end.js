@@ -1,4 +1,4 @@
-class SceneEnd extends OakScene {
+class SceneEnd extends GuaScene {
     constructor(game) {
         super(game)
         game.registerAction('r', function() {

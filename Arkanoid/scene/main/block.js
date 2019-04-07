@@ -1,4 +1,4 @@
-class Block extends OakImage {
+class Block extends GuaImage {
     constructor(game, position) {
         // position 是 [0, 0] 格式
         super(game, 'block')

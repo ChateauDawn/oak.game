@@ -1,4 +1,4 @@
-class OakGame {
+class GuaGame {
     constructor(fps, images, sceneCallback) {
         window.fps = fps
         this.images = images

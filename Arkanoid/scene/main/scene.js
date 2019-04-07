@@ -90,7 +90,7 @@ var Scene = function(game) {
 
     return s
 }
-// class Scene extends OakScene {
+// class Scene extends GuaScene {
 //     constructor(game) {
 //         super(game)
 //         // 初始化

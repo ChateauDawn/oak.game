@@ -1,4 +1,4 @@
-class Paddle extends OakImage {
+class Paddle extends GuaImage {
     constructor(game) {
         super(game, 'paddle')
         this.x = 130
