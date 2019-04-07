@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>雷霆战机</title>
+    <style>
+        canvas {
+            border: 1px black solid;
+            background-color: lightsteelblue;
+        }
+    </style>
+    <!-- gua game 相关文件 -->
+    <script src="gua/utils.js"></script>
+    <script src="gua/gua_game.js"></script>
+    <script src="gua/gua_scene.js"></script>
+    <script src="gua/gua_image.js"></script>
+    <!-- 场景文件 -->
+    <script src="scene/main/paddle.js"></script>
+    <script src="scene/main/ball.js"></script>
+    <script src="scene/main/block.js"></script>
+    <script src="scene/main/scene.js"></script>
+    <!-- 结束和标题场景 -->
+    <script src="scene/end/scene_end.js"></script>
+    <script src="scene/title/scene_title.js"></script>
+    <!-- 关卡数据 -->
+    <script src="level.js"></script>
+</head>
+
+<body>
+    <canvas id="id-canvas" width="400" height="300"></canvas>
+    <hr>
+    <input type="range" id="id-input-speed" value="20">
+    <!-- <p>按 A 或 D 左右移动挡板</p>
+    <p>按 F 开始游戏</p>
+    <p>按 P 暂停/恢复游戏</p> -->
+
+    <script src="main.js"></script>
+</body>
+
+</html>
