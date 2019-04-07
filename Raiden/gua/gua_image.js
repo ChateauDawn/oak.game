@@ -1,5 +1,6 @@
 class GuaImage {
     constructor(game, name) {
+        this.game = game
         this.texture = game.images[name]
         this.image = this.texture
         this.w = this.texture.width
@@ -28,11 +29,7 @@ class GuaImage {
         }
         return false
     }
-}
-
-// 逻辑上 不应该继承 GuaImage, 但暂时这样做吧
-class Player extends GuaImage {
-    constructor(game, name) {
-        super(game, name)
+    update() {
+        
     }
 }
