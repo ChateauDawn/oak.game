@@ -34,12 +34,17 @@ class GuaParticleSystem {
         return new this(...args)
     }
     setup() {
+        this.duration = 50
         this.x = 50
         this.y = 50
         this.numberOfParticles = 20
         this.particles = []
     }
     update() {
+        this.duration--
+        // if (this.duration < 0) {
+        //
+        // }
         // 添加小火花
         if (this.particles.length < this.numberOfParticles) {
             var p = GuaParticle.new(this.game)
@@ -59,6 +64,11 @@ class GuaParticleSystem {
         this.particles = this.particles.filter(p => p.life > 0)
     }
     draw() {
+        if (this.duration < 0) {
+            // TODO: 这是一个临时方案
+            // 应该从 scene 中删除自己 
+            return
+        }
         for (var p  of this.particles) {
             p.draw()
         }
