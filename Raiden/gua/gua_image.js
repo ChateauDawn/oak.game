@@ -8,10 +8,6 @@ class GuaImage {
         this.x = 0
         this.y = 0
     }
-    static instance(...args) {
-        this.i = this.i || new this(...args)
-        return this.i
-    }
     static new(...args) {
         return new this(...args)
     }
@@ -29,7 +25,10 @@ class GuaImage {
         }
         return false
     }
+    draw() {
+        this.game.drawImage(this)
+    }
     update() {
-        
+
     }
 }
