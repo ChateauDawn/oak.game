@@ -17,10 +17,10 @@ class SceneTitle extends GuaScene {
     setupInputs() {
         var game = this.game
         var self = this
-        game.registerAction('k', function() {
-            var s = Scene.new(game)
-            game.replaceScene(s)
-        })
+        // game.registerAction('k', function() {
+        //     var s = Scene.new(game)
+        //     game.replaceScene(s)
+        // })
         game.registerAction('a', function() {
             self.r.move(-2)
         })
