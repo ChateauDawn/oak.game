@@ -13,7 +13,7 @@ class GuaParticle extends GuaImage {
         this.x = x
         this.y = y
         this.vx = vx
-        this.vy = y
+        this.vy = vy
     }
     update() {
         this.life--
@@ -35,8 +35,8 @@ class GuaParticleSystem {
     }
     setup() {
         this.duration = 50
-        this.x = 50
-        this.y = 50
+        this.x = 100
+        this.y = 150
         this.numberOfParticles = 20
         this.particles = []
     }
@@ -66,7 +66,7 @@ class GuaParticleSystem {
     draw() {
         if (this.duration < 0) {
             // TODO: 这是一个临时方案
-            // 应该从 scene 中删除自己 
+            // 应该从 scene 中删除自己
             return
         }
         for (var p  of this.particles) {
