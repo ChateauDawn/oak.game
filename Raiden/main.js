@@ -45,6 +45,17 @@ var __main = function() {
         enemy3: 'img/enemy3.png',
         enemy4: 'img/enemy4.png',
         fire: 'img/fire.png',
+        // animation
+        r0: 'img/ninja/Run__000.png',
+        r1: 'img/ninja/Run__001.png',
+        r2: 'img/ninja/Run__002.png',
+        r3: 'img/ninja/Run__003.png',
+        r4: 'img/ninja/Run__004.png',
+        r5: 'img/ninja/Run__005.png',
+        r6: 'img/ninja/Run__006.png',
+        r7: 'img/ninja/Run__007.png',
+        r8: 'img/ninja/Run__008.png',
+        r9: 'img/ninja/Run__009.png',
     }
     var game = GuaGame.instance(fps, images, function(g) {
         // var s = Scene.new(g)

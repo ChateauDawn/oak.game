@@ -2,7 +2,6 @@ class GuaImage {
     constructor(game, name) {
         this.game = game
         this.texture = game.images[name]
-        this.image = this.texture
         this.w = this.texture.width
         this.h = this.texture.height
         this.x = 0

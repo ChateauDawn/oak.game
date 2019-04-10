@@ -1,9 +1,8 @@
 class GuaImage {
     constructor(game, name) {
-        var image = game.images[name]
-        this.image = image
-        this.w = image.width
-        this.h = image.height
+        this.texture = game.images[name]
+        this.w = this.texture.width
+        this.h = this.texture.height
     }
     static instance(...args) {
         this.i = this.i || new this(...args)
