@@ -4,17 +4,11 @@ class GuaAnimation{
         // 为了省事，hard code 一套动画
         this.animations = {
             "idle": [],
-            "run": [],
         }
-        for (var i = 0; i < 10; i++) {
-            var name = `idle${i}`
+        for (var i = 1; i < 4; i++) {
+            var name = `b${i}`
             var t = game.images[name]
             this.animations['idle'].push(t)
-        }
-        for (var i = 0; i < 10; i++) {
-            var name = `run${i}`
-            var t = game.images[name]
-            this.animations['run'].push(t)
         }
         this.animationName ='idle'
         this.texture = this.frames()[0]
@@ -24,6 +18,9 @@ class GuaAnimation{
         this.frameCount = 2
         //
         this.flipX = false
+        // 重力和加速度
+        this.gy = 10
+        this.vy = 0
     }
     static new(...args) {
         return new this(...args)
@@ -31,7 +28,17 @@ class GuaAnimation{
     frames() {
         return this.animations[this.animationName]
     }
+    jump() {
+        this.vy = -10
+    }
     update() {
+        // 更新受力
+        this.y += this.vy
+        this.vy += this.gy * 0.2
+        var h = 405
+        if (this.y > h) {
+            this.y = h
+        }
         this.frameCount--
         if (this.frameCount == 0) {
             this.frameCount = 1
@@ -59,12 +66,12 @@ class GuaAnimation{
     move(x, keyStatus) {
         this.flipX = x < 0
         this.x += x
-        var animationNames = {
-            down: 'run',
-            up: 'idle',
-        }
-        var name = animationNames[keyStatus]
-        this.changeAnimation(name)
+        // var animationNames = {
+        //     down: 'run',
+        //     up: 'idle',
+        // }
+        // var name = animationNames[keyStatus]
+        // this.changeAnimation(name)
     }
     changeAnimation(name) {
         this.animationName = name
