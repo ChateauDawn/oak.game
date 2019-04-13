@@ -35,9 +35,9 @@ var enableDebugMode = function(game, enable) {
 var __main = function() {
     var fps = 20
     var images = {
-        // background
-        bg: 'img/bird/bg.png',
         // flappy bird images
+        bg: 'img/bird/bg.png',
+        pipe: 'img/bird/pipe_up.png',
         ground: 'img/bird/ground.png',
         b1: 'img/bird/b1.png',
         b2: 'img/bird/b2.png',

@@ -6,6 +6,9 @@ class GuaImage {
         this.h = this.texture.height
         this.x = 0
         this.y = 0
+        //
+        this.flipY = false
+        this.rotation = 0
     }
     static new(...args) {
         return new this(...args)
