@@ -3,8 +3,8 @@ class GuaAnimation{
         this.game = game
         // 为了省事，hard code 一套动画
         this.animations = {
-            idle: [],
-            run: [],
+            "idle": [],
+            "run": [],
         }
         for (var i = 0; i < 10; i++) {
             var name = `idle${i}`

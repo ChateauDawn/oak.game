@@ -21,11 +21,11 @@ class SceneTitle extends GuaScene {
         //     var s = Scene.new(game)
         //     game.replaceScene(s)
         // })
-        game.registerAction('a', function() {
-            self.r.move(-2)
+        game.registerAction('a', function(keyStatus) {
+            self.r.move(-2, keyStatus)
         })
-        game.registerAction('d', function() {
-            self.r.move(2)
+        game.registerAction('d', function(keyStatus) {
+            self.r.move(2, keyStatus)
         })
     }
 }

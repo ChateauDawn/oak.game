@@ -49,13 +49,12 @@ class GuaGame {
         for (var i = 0; i < actions.length; i++) {
             var key = actions[i]
             var status = self.keydowns[key]
-            self.actions[key](status)
-            // if (status == 'down') {
-            //     // 如果按键被按下，调用注册的 action
-            //     self.actions[key]('down')
-            // } else
+            if (status == 'down') {
+                // 如果按键被按下，调用注册的 action
+                self.actions[key]('down')
+            } else
             if (status == 'up') {
-                // self.actions[key]('up')
+                self.actions[key]('up')
                 // 删除掉这个 key 的 状态
                 self.keydowns[key] = null
             }
