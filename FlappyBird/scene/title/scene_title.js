@@ -55,8 +55,8 @@ class SceneTitle extends GuaScene {
         game.registerAction('a', function(keyStatus) {
             b.move(-5, keyStatus)
         })
-        game.registerAction('a', function(keyStatus) {
-            b.move(-5, keyStatus)
+        game.registerAction('d', function(keyStatus) {
+            b.move(5, keyStatus)
         })
         game.registerAction('j', function(keyStatus) {
             b.jump()
