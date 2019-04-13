@@ -7,7 +7,7 @@ class SceneTitle extends GuaScene {
     setup() {
         var label = GuaLabel.new(this.game, 'hello from gua')
         this.addElement(label)
-
+        // player
         var r = GuaAnimation.new(this.game)
         r.x = 0
         r.y = 100
@@ -22,10 +22,10 @@ class SceneTitle extends GuaScene {
         //     game.replaceScene(s)
         // })
         game.registerAction('a', function(keyStatus) {
-            self.r.move(-2, keyStatus)
+            self.r.move(-5, keyStatus)
         })
         game.registerAction('d', function(keyStatus) {
-            self.r.move(2, keyStatus)
+            self.r.move(5, keyStatus)
         })
     }
 }
