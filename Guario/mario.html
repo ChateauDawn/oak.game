@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>guario</title>
+        <style>
+            canvas {
+                border: 1px black solid;
+            }
+        </style>
+    </head>
+    <body>
+        <h3></h3>
+        <canvas id="id-canvas" width="640" height="640"></canvas>
+        <div class="gua-controls">
+            <button data-action='change_offset' data-offset="-1024">-1024</button>
+            <button data-action='change_offset' data-offset="-16">-16</button>
+            <button data-action='change_offset' data-offset="16">16</button>
+            <button data-action='change_offset' data-offset="1024">1024</button>
+        </div>
+
+        <script src="render.js"></script>
+        <!-- 自动生成控件 -->
+        <!-- <script src="config.js"></script> -->
+        <!-- <script src="controls.js"></script> -->
+    </body>
+</html>
