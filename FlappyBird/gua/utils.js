@@ -2,6 +2,10 @@ var log = function() {
     console.log.apply(console, arguments)
 }
 
+var e = sel => document.querySelector(sel)
+
+var es = sel => document.querySelectorAll(sel)
+
 var imageFromPath = function(path) {
     // 载入图片
     var img = new Image()
