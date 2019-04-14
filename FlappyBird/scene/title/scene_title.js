@@ -23,11 +23,22 @@ class Pipses {
         p1.y = randomBetween(-200, 0)
         p2.y = p1.y + p1.h + this.pipeSpaceY
     }
+    debug() {
+        this.pipeSpaceX = config.pipe_space_x.value
+        this.pipeSpaceY = config.pipe_space_y.value
+    }
     update() {
-        for (var p of this.pipes) {
-            p.x -= 5
-            if (p.x < -100) {
-                p.x += this.pipeSpaceX * this.columsOfPipe
+        for (var i = 0; i < this.pipes.length; i += 2) {
+            var p1 = this.pipes[i]
+            var p2 = this.pipes[i+1]
+            p1.x -= 5
+            p2.x -= 5
+            if (p1.x < -100) {
+                p1.x += this.pipeSpaceX * this.columsOfPipe
+            }
+            if (p2.x < -100) {
+                p2.x += this.pipeSpaceX * this.columsOfPipe
+                this.resetPipesPosition(p1, p2)
             }
         }
     }
@@ -80,11 +91,15 @@ class SceneTitle extends GuaScene {
         }
         this.skipCount = 4
         // bird
+        this.birdSpeed = 5
         var b = GuaAnimation.new(game)
         b.x = 120
         b.y = 200
         this.bird = b
         this.addElement(b)
+    }
+    debug() {
+        this.birdSpeed = config.bird_speed.value
     }
     update() {
         super.update()
@@ -109,10 +124,10 @@ class SceneTitle extends GuaScene {
         //     game.replaceScene(s)
         // })
         game.registerAction('a', function(keyStatus) {
-            b.move(-5, keyStatus)
+            b.move(-self.birdSpeed, keyStatus)
         })
         game.registerAction('d', function(keyStatus) {
-            b.move(5, keyStatus)
+            b.move(self.birdSpeed, keyStatus)
         })
         game.registerAction('j', function(keyStatus) {
             b.jump()

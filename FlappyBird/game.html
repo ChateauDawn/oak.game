@@ -58,6 +58,7 @@
                 <div class="">
                     <label>
                         <input class="gua-auto-slider" type="range"
+                            max="300"
                             value="${item.value}"
                             data-value="config.${key}"
                             >
@@ -83,7 +84,8 @@
                 var target = event.target
                 var bindVar = target.dataset.value
                 var v = target.value
-                eval(bindVar + ' = ' + v)
+                // config[bindVar].value = v
+                eval(bindVar + '.value=' + v)
                 //
                 var label = target.closest("label").querySelector(".gua-label")
                 label.innerText = v

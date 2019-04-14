@@ -18,6 +18,7 @@ class GuaScene {
         }
     }
     update() {
+        this.debug && this.debug()
         if (this.debugModeEnabled) {
             for (var e of this.elements) {
                 e.debug && e.debug()
