@@ -84,17 +84,55 @@ const bindEvents = () => {
         let offset = Number(event.target.dataset.offset)
         actions[action] && actions[action](offset)
     })
+    window.addEventListener('keydown', event => {
+        if (event.key == 'p') {
+            window.paused = !window.paused
+        }
+    })
+}
+
+const drawSprite = data => {
+    let context = e('#id-canvas-sprite').getContext('2d')
+    let pixelsPerBlock = 8
+    let pixelWidth = 10
+    let blockSize = pixelsPerBlock * pixelWidth
+    let offset = 0
+    for (var i = 0; i < 4; i++) {
+        for (var j = 0; j < 2; j++) {
+            let x = j * blockSize
+            let y = i * blockSize
+            let pixels = data.slice(offset)
+            drawBlock(context, pixels, x, y, pixelWidth)
+            offset += 16
+        }
+    }
 }
 
 const __main = () => {
+    window.paused = false
     window.offset = 32784
+    let tileOffset = 32784
     let request = {
         method: 'GET',
         url: 'mario.nes',
         callback(r) {
             window.bytes = new Uint8Array(r)
-            log('bytes', window.bytes)
+            // log('bytes', window.bytes)
             drawNes(window.bytes)
+            let step = 0
+            let bytesPerBlock = 16
+            let tilesPerSprite = 8
+            let bytesPerSprite = bytesPerBlock * tilesPerSprite
+            setInterval(function() {
+                let offset = tileOffset + step * bytesPerSprite
+                drawSprite(bytes.slice(offset))
+                if (window.paused) {
+                    //暂停
+                } else {
+                    step += 1
+                    step %= 4
+                }
+            }, 1000)
         },
     }
     ajax(request)
