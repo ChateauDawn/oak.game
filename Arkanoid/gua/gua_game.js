@@ -30,7 +30,7 @@ class GuaGame {
         return new this(...args)
     }
     drawImage(img) {
-        this.context.drawImage(img.image, img.x, img.y)
+        this.context.drawImage(img.texture, img.x, img.y)
     }
     update() {
         this.scene.update()
