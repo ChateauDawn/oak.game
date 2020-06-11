@@ -11,18 +11,20 @@ class GuaImage {
     static new(...args) {
         return new this(...args)
     }
-    aInb(x, x1, x2) {
-        return x >= x1 && x <= x2
+    centerPoint() {
+        // 因为图片的坐标原点在左上角
+        let cx = this.x + this.w / 2
+        let cy = this.y - this.h / 2
+        return [cx, cy]
     }
     rectIntersects(other) {
-        var a = this
-        var b = other
-        var aInb = this.aInb
-        if (aInb(a.x, b.x, b.x + b.w) || aInb(b.x, a.x, a.x + a.w)) {
-            if (aInb(a.y, b.y, b.y + b.h) || aInb(b.y, a.y, a.y + a.h)) {
-                return true
-            }
-        }
-        return false
+        let [ax, ay] = this.centerPoint()
+        let [bx, by] = other.centerPoint()
+        // 中心点距离 x轴小于宽之和的一半 且 y轴小于高之和的一半
+        let dx = Math.abs(ax - bx)
+        let dy = Math.abs(ay - by)
+        let halfWidth = (this.w + other.w) / 2
+        let halfHeight = (this.h + other.h) / 2
+        return dx < halfWidth && dy < halfHeight
     }
 }
